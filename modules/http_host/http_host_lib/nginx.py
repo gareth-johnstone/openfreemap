@@ -144,7 +144,7 @@ def create_location_blocks(*, local, domain):
         ]:
             curl_text += (
                 # f'curl -H "Host: __LOCAL__" -I http://localhost/{path}\n'
-                f'curl -sI http://__DOMAIN__{path} | sort\n'
+                f'curl -sI https://__DOMAIN__{path} | sort\n'
             )
 
     location_str += create_latest_locations(local=local, domain=domain)
@@ -158,7 +158,7 @@ def create_location_blocks(*, local, domain):
         ]:
             curl_text += (
                 # f'curl -H "Host: __LOCAL__" -I http://localhost/{path}\n'
-                f'curl -sI http://__DOMAIN__{path} | sort\n'
+                f'curl -sI https://__DOMAIN__{path} | sort\n'
             )
 
     with open(config.nginx_confs / 'location_static.conf') as fp:
@@ -182,7 +182,7 @@ def create_version_location(
         print(f"  {metadata_path} doesn't exist, skipping")
         return ''
 
-    url_prefix = f'http://{domain}/{area}/{version}'
+    url_prefix = f'https://{domain}/{area}/{version}'
 
     subprocess.run(
         [
