@@ -57,7 +57,7 @@ def write_nginx_config():
         )
 
         subprocess.run(['nginx', '-t'], check=True)
-        subprocess.run(['systemctl', 'reload', 'nginx'], check=True)
+        subprocess.run(['systemctl', 'reload', 'nginx'], check=False)
 
         if not self_signed_certs:
             subprocess.run(
