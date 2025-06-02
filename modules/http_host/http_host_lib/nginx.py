@@ -77,7 +77,7 @@ def write_nginx_config():
                     '-d',
                     domain_direct,
                 ],
-                check=True,
+                check=False,
             )
 
             # link certs to nginx dir
