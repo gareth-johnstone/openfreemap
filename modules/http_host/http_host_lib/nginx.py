@@ -81,15 +81,15 @@ def write_nginx_config():
             )
 
             # link certs to nginx dir
-            direct_cert.unlink()
-            direct_key.unlink()
+            # direct_cert.unlink()
+            # direct_key.unlink()
 
-            etc_cert = Path('/etc/letsencrypt/live/ofm_direct/fullchain.pem')
-            etc_key = Path('/etc/letsencrypt/live/ofm_direct/privkey.pem')
-            assert etc_cert.is_file()
-            assert etc_key.is_file()
-            direct_cert.symlink_to(etc_cert)
-            direct_key.symlink_to(etc_key)
+            # etc_cert = Path('/etc/letsencrypt/live/ofm_direct/fullchain.pem')
+            # etc_key = Path('/etc/letsencrypt/live/ofm_direct/privkey.pem')
+            # assert etc_cert.is_file()
+            # assert etc_key.is_file()
+            # direct_cert.symlink_to(etc_cert)
+            # direct_key.symlink_to(etc_key)
 
     subprocess.run(['nginx', '-t'], check=True)
     subprocess.run(['systemctl', 'reload', 'nginx'], check=False)
@@ -144,7 +144,7 @@ def create_location_blocks(*, local, domain):
         ]:
             curl_text += (
                 # f'curl -H "Host: __LOCAL__" -I http://localhost/{path}\n'
-                f'curl -sI https://__DOMAIN__{path} | sort\n'
+                f'curl -sI http://__DOMAIN__{path} | sort\n'
             )
 
     location_str += create_latest_locations(local=local, domain=domain)
@@ -158,7 +158,7 @@ def create_location_blocks(*, local, domain):
         ]:
             curl_text += (
                 # f'curl -H "Host: __LOCAL__" -I http://localhost/{path}\n'
-                f'curl -sI https://__DOMAIN__{path} | sort\n'
+                f'curl -sI http://__DOMAIN__{path} | sort\n'
             )
 
     with open(config.nginx_confs / 'location_static.conf') as fp:
@@ -182,7 +182,7 @@ def create_version_location(
         print(f"  {metadata_path} doesn't exist, skipping")
         return ''
 
-    url_prefix = f'https://{domain}/{area}/{version}'
+    url_prefix = f'http://{domain}/{area}/{version}'
 
     subprocess.run(
         [
