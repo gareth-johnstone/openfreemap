@@ -182,20 +182,21 @@ def setup_roundrobin_writer(c):
     # only use with --staging
     # c.sudo('certbot delete --noninteractive --cert-name ofm_roundrobin', warn=True)
 
-    sudo_cmd(
-        c,
-        'certbot certonly '
-        '--dns-cloudflare '
-        f'--dns-cloudflare-credentials {REMOTE_CONFIG}/cloudflare.ini '
-        '--dns-cloudflare-propagation-seconds 20 '
-        f'--noninteractive '
-        f'-m {letsencrypt_email} '
-        f'--agree-tos '
-        f'--cert-name=ofm_roundrobin '
-        f'--deploy-hook /data/ofm/roundrobin/rclone_write.sh '
-        f'-d {domain_roundrobin}',
-        # f'-d {domain2_roundrobin}',
-    )
+    # sudo_cmd(
+    #     c,
+    #     'certbot certonly '
+    #     '--dns-cloudflare '
+    #     f'--dns-cloudflare-credentials {REMOTE_CONFIG}/cloudflare.ini '
+    #     '--dns-cloudflare-propagation-seconds 20 '
+    #     f'--noninteractive '
+    #     f'-m {letsencrypt_email} '
+    #     f'--agree-tos '
+    #     f'--cert-name=ofm_roundrobin '
+    #     f'--deploy-hook /data/ofm/roundrobin/rclone_write.sh '
+    #     f'-d {domain_roundrobin}',
+    #     # f'-d {domain2_roundrobin}',
+    # )
+    return True
 
 
 def upload_config_json(c):
