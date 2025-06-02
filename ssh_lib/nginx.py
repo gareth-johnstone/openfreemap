@@ -53,18 +53,19 @@ def nginx(c):
 
 
 def certbot(c):
-    apt_get_install(c, 'snapd')
+    return True
+    # apt_get_install(c, 'snapd')
 
-    # this is silly, but needs to be run twice
-    c.sudo('snap install core', warn=True, echo=True)
-    c.sudo('snap install core', warn=True, echo=True)
+    # # this is silly, but needs to be run twice
+    # c.sudo('snap install core', warn=True, echo=True)
+    # c.sudo('snap install core', warn=True, echo=True)
 
-    c.sudo('snap refresh core', warn=True)
+    # c.sudo('snap refresh core', warn=True)
 
-    apt_get_purge(c, 'certbot')
-    c.sudo('snap install --classic certbot', warn=True)
-    c.sudo('snap set certbot trust-plugin-with-root=ok', warn=True)
-    c.sudo('snap install certbot-dns-cloudflare', warn=True)
+    # apt_get_purge(c, 'certbot')
+    # c.sudo('snap install --classic certbot', warn=True)
+    # c.sudo('snap set certbot trust-plugin-with-root=ok', warn=True)
+    # c.sudo('snap install certbot-dns-cloudflare', warn=True)
 
 
 def lego(c):
